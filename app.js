@@ -9,6 +9,8 @@ let port = process.env.PORT || 8844;
 const bot = new TelegramBot(token, { polling: true });
 
 bot.on('message', async (data) => {
+  await bot.sendMessage(chatId, '请直接回复QQ/手机号/微博ID');
+  return;
   const chatId = data.chat.id;
   const query = Number(data.text);
   console.log('query:', query);
@@ -21,8 +23,10 @@ bot.on('message', async (data) => {
     const result = await byData(query);
     console.log('result:', result);
     await bot.sendMessage(chatId, result, { parse_mode: 'HTML' });
+    return;
   } else {
     await bot.sendMessage(chatId, '请直接回复QQ/手机号/微博ID');
+    return;
   }
 });
 
