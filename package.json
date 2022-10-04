@@ -1,0 +1,23 @@
+{
+  "name": "tg-sg",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node tg.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@vercel/node": "^2.5.11",
+    "axios": "^0.27.2",
+    "axios-https-proxy-fix": "^0.17.1",
+    "cheerio": "^1.0.0-rc.10",
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "https": "^1.0.0",
+    "node-telegram-bot-api": "^0.58.0",
+    "tunnel": "0.0.6"
+  }
+}
