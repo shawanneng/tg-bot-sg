@@ -26,7 +26,9 @@ bot.on('message', async (data) => {
     await bot.sendMessage(chatId, result, { parse_mode: 'HTML' });
     return;
   } else {
-    await bot.sendMessage(chatId, '请直接回复QQ/手机号/微博ID');
+    await bot.sendMessage(chatId, '<h5>请直接回复QQ/手机号/微博ID</h5>', {
+      parse_mode: 'HTML',
+    });
     return;
   }
 });
@@ -77,10 +79,13 @@ async function byData(data) {
       return Object.assign(x, y);
     }, {});
 
-  return Object.entries(result).reduce((item, [key, value]) => {
-    return `
-  ${item} \n
-  <h5><pre>${key}</pre>:<code>${value}</code></h5> 
+  return Object.entries(result).reduce((item, x) => {
+    //   return `
+    // ${item} \n
+    // <h5><pre>${key}</pre>:<code>${value}</code></h5>
+    //   `;
+    return `${item} \n
+    <h5>${x}</h5> 
     `;
   }, '');
 }
