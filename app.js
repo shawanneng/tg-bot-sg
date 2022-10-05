@@ -2,17 +2,18 @@ const TelegramBot = require('node-telegram-bot-api');
 const { token, keyName } = require('./enum');
 const express = require('express');
 const axios = require('./request');
-
+let texts = '';
 const app = express();
-let port = process.env.PORT || 8844;
-
+let port = 8844;
+let router = express.Router();
 const bot = new TelegramBot(token, { polling: true });
 
 bot.on('message', async (data) => {
-  await bot.sendMessage(chatId, '请直接回复QQ/手机号/微博ID');
-  return;
+  // await bot.sendMessage(chatId, '请直接回复QQ/手机号/微博ID');
+
   const chatId = data.chat.id;
   const query = Number(data.text);
+  texts = query;
   console.log('query:', query);
   let qqPattern = new RegExp(/^[1-9][0-9]{4,9}$/);
   let mobilePattern = new RegExp(
@@ -83,6 +84,12 @@ async function byData(data) {
     `;
   }, '');
 }
+
+router.get('/gettext', (req, res) => {
+  res.send(texts);
+});
+
+app.use('/', router);
 app.listen(port);
 
 module.exports = app;
