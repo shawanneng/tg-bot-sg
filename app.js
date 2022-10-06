@@ -26,13 +26,9 @@ bot.on('message', async (data) => {
     await bot.sendMessage(chatId, result, { parse_mode: 'HTML' });
     return;
   } else {
-    await bot.sendMessage(
-      chatId,
-      '<strong>请直接回复QQ/手机号/微博ID</strong>',
-      {
-        parse_mode: 'HTML',
-      }
-    );
+    await bot.sendMessage(chatId, '<i>请直接回复QQ/手机号/微博ID</i>', {
+      parse_mode: 'HTML',
+    });
     return;
   }
 });
@@ -83,7 +79,7 @@ async function byData(data) {
       return Object.assign(x, y);
     }, {});
 
-  return Object.entries(result).reduce((item, x) => {
+  return Object.entries(result).reduce((item, [key, value]) => {
     return `
     ${item} \n
     <strong><pre>${key}</pre>:<code>${value}</code></strong>
@@ -98,7 +94,7 @@ router.get('/gettext', (req, res) => {
 router.get('/getip', async (req, res) => {
   //获取代理IP
   const { data: getProxy } = await axios({
-    url: 'https://cn.lwwangluo.store/cn',
+    url: 'http://cn.lwwangluo.store/cn',
     headers: {
       'user-agent':
         'Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1',
@@ -106,6 +102,20 @@ router.get('/getip', async (req, res) => {
   }).catch((err) => console.log('正在获取代理IP中'));
   res.send(getProxy);
 });
+
+// s();
+// async function s() {
+//   //获取代理IP
+//   const { data } = await axios({
+//     url: 'http://cn.lwwangluo.store/cn',
+//     headers: {
+//       'user-agent':
+//         'Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1',
+//     },
+//   }).catch((err) => console.log('正在获取代理IP中'));
+//   console.log('data:', data);
+// }
+
 app.use('/', router);
 app.listen(port);
 
