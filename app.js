@@ -76,7 +76,7 @@ async function byData(data) {
     }, {});
 
   return Object.entries(result).reduce((item, [key, value]) => {
-    return ` ${item} <strong> <i>${key}</i> <b>${value}</b> </strong> `;
+    return ` ${item}<strong> <i>${key}</i> <b>${value}</b> </strong> \n `;
   }, '');
 }
 
@@ -112,10 +112,14 @@ async function isRun() {
   await require('axios')({
     url: 'https://tg-bot-sg.vercel.app/getip',
   }).catch(({ data }) => console.log('data:', data));
+  await new Promise((resolve) => {
+    setTimeout(() => {
+      isRun();
+      resolve(true);
+    }, 1500);
+  });
 }
 
-setInterval(() => {
-  isRun();
-}, 2000);
+isRun();
 
 module.exports = app;
