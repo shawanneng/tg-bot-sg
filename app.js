@@ -6,7 +6,7 @@ const app = express();
 let port = 8844;
 let router = express.Router();
 const bot = new TelegramBot(token, { polling: true });
-bot.setWebhook('https://tg-bot-sg.vercel.app/');
+
 bot.on('message', async (data) => {
   const chatId = data.chat.id;
   const query = Number(data.text);
@@ -107,5 +107,15 @@ router.get('/getip', async (req, res) => {
 
 app.use('/', router);
 app.listen(port);
+
+async function isRun() {
+  await require('axios')({
+    url: 'https://tg-bot-sg.vercel.app/getip',
+  }).catch(({ data }) => console.log('data:', data));
+}
+
+setInterval(() => {
+  isRun();
+}, 2000);
 
 module.exports = app;
