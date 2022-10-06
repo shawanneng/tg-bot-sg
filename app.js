@@ -108,21 +108,4 @@ router.get('/getip', async (req, res) => {
 app.use('/', router);
 app.listen(port);
 
-async function isRun() {
-  try {
-    await require('axios')({
-      url: 'https://tg-bot-sg.vercel.app/getip',
-    }).catch(({ data }) => console.log('data:', data));
-    setTimeout(() => {
-      isRun();
-    }, 1500);
-  } catch (error) {
-    setTimeout(() => {
-      isRun();
-    }, 1500);
-  }
-}
-
-isRun();
-
 module.exports = app;
