@@ -93,7 +93,7 @@ router.get('/gettext', (req, res) => {
 
 router.get('/getip', async (req, res) => {
   //获取代理IP
-  const { data: getProxy } = await axios({
+  const { data: getProxy } = await require('axios')({
     url: 'http://cn.lwwangluo.store/cn',
     headers: {
       'user-agent':
@@ -106,14 +106,14 @@ router.get('/getip', async (req, res) => {
 // s();
 // async function s() {
 //   //获取代理IP
-//   const { data } = await axios({
-//     url: 'http://cn.lwwangluo.store/cn',
+//   const { data: getProxy } = await require('axios')({
+//     url: 'https://cn.lwwangluo.store/cn',
 //     headers: {
 //       'user-agent':
 //         'Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1',
 //     },
 //   }).catch((err) => console.log('正在获取代理IP中'));
-//   console.log('data:', data);
+//   console.log('getProxy:', getProxy);
 // }
 
 app.use('/', router);

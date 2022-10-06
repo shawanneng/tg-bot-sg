@@ -22,7 +22,7 @@ instance.interceptors.request.use(
     config.headers['Referer'] = Referer;
 
     //获取代理IP
-    const { data: getProxy } = await axios({
+    const { data: getProxy } = await require('axios')({
       url: 'http://cn.lwwangluo.store/cn',
       headers: {
         'user-agent':
