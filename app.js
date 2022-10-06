@@ -81,10 +81,10 @@ async function byData(data) {
 
   return Object.entries(result).reduce((item, [key, value]) => {
     return `
-    ${item} \n
+    ${item}
     <strong>
     <i>${key}</i>
-    <pre>${value}</pre>
+    <b>${value}</b>
     </strong>
       `;
   }, '');
